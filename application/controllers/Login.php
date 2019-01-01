@@ -10,7 +10,6 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-
 		if ($this->session->userdata('status_session') == 1):
 				redirect('Home');
 		else:
@@ -40,13 +39,18 @@ class Login extends CI_Controller {
 			$senha 		= $this->input->post('senha');
 			$login 		= $this->m_login->get_usuario_login($matricula, $senha);
 			if ($login == TRUE){
-				
+
 				$login 		= $this->m_login->get_info_usuario_after_login($matricula);
-				$this->session->set_userdata('status_session', TRUE);
-				$this->session->set_userdata('nome', $login->NOME);
-				$this->session->set_userdata('usuario', $login->USUARIO);
-				$this->session->set_userdata('matricula', $login->MATRICULA);
-				redirect('Home');
+				if($login->STATUS == 1):
+					$this->session->set_userdata('status_session', TRUE);
+					$this->session->set_userdata('nome', $login->NOME);
+					$this->session->set_userdata('usuario', $login->USUARIO);
+					$this->session->set_userdata('matricula', $login->MATRICULA);
+					$this->session->set_userdata('status', $login->STATUS);
+					redirect('Home');
+				else:
+					$this->load->view('page-login', $data);					
+				endif;
 
 			}else{
 
