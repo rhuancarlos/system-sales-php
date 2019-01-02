@@ -41,7 +41,11 @@
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
-                        <div class="error"><?PHP if(isset($mensagem)){ echo $mensagem; } ?></div>
+                            <?PHP if(isset($mensagem)){ 
+                                echo '<div class="alert alert-danger" role="alert">' .
+                                        $mensagem; 
+                                    '</div>';
+                            } ?>
                         <div class="login-logo">
                             <a href="#">
                                 <!-- <img src="<?PHP //echo base_url('assets/images/icon/logo.png')?>" alt="CoolAdmin"> -->

@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-header">
-        <strong>Cadastro de Usário</strong>
+        <strong>Cadastro de Usário</strong> <i><small> (Criado em <span id="info"></span>)</i></small>
     </div>
     <div class="card-body card-block">
         <form>
             <div class="form-group">
-                <input type="text" id="editedituser_cod" readonly class="form-control col-md-1">
+                <label>Código: </label><input type="text" id="editedituser_cod" readonly class="form-control col-md-1">
             </div>
             <div class="form-group">
                 <input type="text" id="edituser_nome" name="nome" placeholder="Nome completo . . ." class="form-control">
@@ -25,8 +25,8 @@
         </form>
     </div>
     <div class="card-footer">
-        <button type="submit" id="submit" class="btn btn-primary btn-sm">
-            <i class="fa fa-dot-circle-o"></i> Enviar
+        <button type="submit" id="confirmUpdateItem" class="btn btn-primary btn-sm">
+            <i class="fa fa-dot-circle-o"></i> Atualizar
         </button>
         <button type="reset" class="btn btn-danger btn-sm">
             <i class="fa fa-ban"></i> Cancelar

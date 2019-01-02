@@ -71,18 +71,35 @@ class Usuario extends CI_Controller {
 	}
 
 	public function addUser(){
-		$data=$this->m_user->user_add();
-		echo json_encode($data);
+
+	        $checkUser = $this->m_user->check_user_exist($this->input->post('user_matricula'));
+	        if ($checkUser){
+	    
+	            return false;
+	            var_dump($checkUser);
+	    
+	        }else{
+
+				$data=$this->m_user->user_add();
+				echo json_encode($data);
+			}
 	}
 
-	public function updateUser(){
-
-	}
 
 	public function deleteUser(){
 		$data=$this->m_user->delete_user();
 		echo json_encode($data);
 		
+	}
+
+	public function getDataUserForedit(){
+		$data=$this->m_user->get_user_for_update();
+		echo json_encode($data);
+	}
+
+	public function actionEditRecordUser(){
+		$data=$this->m_user->action_EditUser();
+		echo json_encode($data);
 	}
 
 

@@ -25,7 +25,6 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('matricula', 'Matricula', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('senha', 'Senha', 'trim|required|max_length[10]');
 
-		$data['mengagem'] 	= 'Matricula ou Senha inválida Invalida';
 		$data['metatitle'] 	= 'System Sales';
 		$this->load->view('page-login', $data);
 
@@ -37,25 +36,30 @@ class Login extends CI_Controller {
 		else:
 			$matricula 	= $this->input->post('matricula');
 			$senha 		= $this->input->post('senha');
-			$login 		= $this->m_login->get_usuario_login($matricula, $senha);
-			if ($login == TRUE){
+			$login 		= $this->m_login->get_usuario_login($matricula);#, $senha);
+			if ($login == TRUE):
+				if(password_verify($senha, $login->SENHA)):
+					$login 		= $this->m_login->get_info_usuario_after_login($matricula);
 
-				$login 		= $this->m_login->get_info_usuario_after_login($matricula);
-				if($login->STATUS == 1):
-					$this->session->set_userdata('status_session', TRUE);
-					$this->session->set_userdata('nome', $login->NOME);
-					$this->session->set_userdata('usuario', $login->USUARIO);
-					$this->session->set_userdata('matricula', $login->MATRICULA);
-					$this->session->set_userdata('status', $login->STATUS);
-					redirect('Home');
+					if($login->STATUS == 1):
+						$this->session->set_userdata('status_session', TRUE);
+						$this->session->set_userdata('nome', $login->NOME);
+						$this->session->set_userdata('usuario', $login->USUARIO);
+						$this->session->set_userdata('matricula', $login->MATRICULA);
+						$this->session->set_userdata('status', $login->STATUS);
+						redirect('Home');
+					else:
+						echo "Matricula Desativada";
+						redirect('Home');
+					endif;
 				else:
-					$this->load->view('page-login', $data);					
+					var_dump(password_verify($senha, $this->m_login->get_usuario_login($login->SENHA)));
+					echo "Senha Inválida";
 				endif;
-
-			}else{
-
+			else:
+				echo "Matricula Inválida";
 				$this->load->view('page-login', $data);
-			}
+			endif;
 
 		endif;
 

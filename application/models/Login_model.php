@@ -9,28 +9,31 @@ class Login_model extends CI_Model{
     }
 
 
-    public function get_usuario_login($matricula, $senha){
-
+    public function get_usuario_login($matricula)
+    {
     	$query = $this->db->query
-    		("SELECT
-    		 * 
-    		FROM 
-                ss_usuarios
-    		WHERE
-                MATRICULA = '$matricula'
-            AND
-                SENHA = '$senha' ");
+    		("SELECT * FROM ss_usuarios WHERE MATRICULA = '$matricula'");
 
 	    	if ($query->num_rows() == 1)
-            {
-	    		return true;
-	    	}
+            {   
+                return $query->row();
+            }
             else
-            {
-	    		return false;
-	    	}
+            { return false; }
+	}
 
-    	}
+    // public function get_password_verify($senha)
+    // {
+    //     $query = $this->db->query
+    //         ("SELECT SENHA FROM ss_usuarios WHERE SENHA = '$senha' LIMIT 1");
+
+    //         if ($query->num_rows() == 1)
+    //         {  $row = $query->row();
+    //             return $row->SENHA; 
+    //         }
+    //         else
+    //         { return NULL; }
+    // }
 
     public function get_info_usuario_after_login($matricula){
 
