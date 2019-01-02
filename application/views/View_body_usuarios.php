@@ -73,8 +73,9 @@
                     </div>
                 </div>
             </div>
-        <?PHP $this->load->view('_modal_novousuario'); ?>
-        <?PHP $this->load->view('_modal_excluir'); ?>
+        <?PHP $this->load->view('_modal_novousuario');  ?>
+        <?PHP $this->load->view('_modal_excluir');      ?>
+        <?PHP $this->load->view('_modal_editar');   ?>   
         </div>
         <!-- END PAGE CONTAINER-->
     </div>

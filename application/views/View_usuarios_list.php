@@ -7,7 +7,10 @@
                 <div class="table-data__tool">
                     <div class="table-data__tool-right">
                         <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modal_addUser">
-                            <i class="zmdi zmdi-plus"></i>Novo Usuário
+                            <i class="zmdi zmdi-plus"></i> Novo Usuário
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="atualizar">
+                            <i class="zmdi zmdi-refresh"></i> Atualizar
                         </button>
                     </div>
                 </div>
@@ -15,12 +18,6 @@
                     <table class="table table-data2" id="tablelistusers">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </th>
                                 <th>COD</th>
                                 <th>NOME</th>
                                 <th>MATRICULA</th>
@@ -28,6 +25,8 @@
                                 <th style="text-align: center;">AÇÕES</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>
                 <!-- END DATA TABLE -->

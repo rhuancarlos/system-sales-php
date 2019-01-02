@@ -11,13 +11,14 @@
 			</div>
 			<div class="modal-body">
 				<p>
-					Deseja realmente exluir
+					Deseja excluir <b>código "<span id="coddisplay"></span>"</b>
 				</p>
 			</div>
 			<div class="modal-footer">
-				<input type="hidden" id="user_id" name="user_id" class="form-control" >
+				<input type="hidden" id="user_name" name="user_id" class="form-control">
+				<input type="hidden" id="user_id" name="user_id" class="form-control">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-danger">Excluir</button>
+				<button type="button" class="btn btn-danger" id="confirmDeleteItem" >Excluir</button>
 			</div>
 		</div>
 	</div>

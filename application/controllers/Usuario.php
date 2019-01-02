@@ -18,55 +18,56 @@ class Usuario extends CI_Controller {
 		endif;
 	}
 
-	public function getUsers(){
+	public function viewlistUser(){
 
-		// $Users = $this->m_user->get_users();
-		#$data = $this->m_user->get_users();		
-		#echo json_encode($data);
-		#$data['listagem']		=	$Users = $this->m_user->get_users();
-
-
-        #$list = $this->customers->get_datatables();
-		$get_database = $this->m_user->get_user__start_length();
-        $data = array();
-        foreach ($get_database as $datauser) {
-            $list 	= array();
-            $list[] = '<label class="au-checkbox">
-            				<input type="checkbox">
-							<span class="au-checkmark"></span>
-						</label>';
-            $list[] = $datauser->ID;
-            $list[] = $datauser->NOME;
-            $list[] = $datauser->MATRICULA;
-            $list[] = $datauser->STATUS;
-            $list[] = '<div class="table-data-feature">
-                        <span data-toggle="modal" data-target="#modalEditar">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                <i class="zmdi zmdi-edit"></i>
-                            </button>
-                        </span>
-                        <div class="table-data-feature">
-                            <span data-toggle="modal" data-target="#modalDelet">
-                                <button class="item" id="itemDelet" value="'. $datauser->ID . '" data-toggle="tooltip" data-placement="top" title="Remover">
-                                </button>
-                            </span>
-                        </div>
-                    </div>';
-            $data[]	= $list;
-        }
- 
-        $output = array(
-                        "draw" 				=> intval(isset($_POST["draw"])),
-                        "recordsTotal" 		=> $this->m_user->get_users_total(),
-                        "recordsFiltered" 	=> $this->m_user->get_users_filter(),
-                        "data" 				=> $data,
-                );
-        //output to json format
-        echo json_encode($output);
 		$data['metatitle'] 		= 	'Dashboard - System Sales';
 		$data['getcontroller'] 	= 	$this->router->fetch_class();
 		$data['getmethod'] 		= 	$this->router->fetch_method();
 		$this->load->view('View_body_usuarios', $data);
+	}
+
+	public function getUsers()
+	{
+
+		// Datatables Variables
+		$draw 	= intval($this->input->get("draw"));
+		$start 	= intval($this->input->get("start"));
+		$length 	= intval($this->input->get("length"));
+
+		$usuarios = $this->m_user->get_users();
+
+		$data = array();
+
+          foreach($usuarios as $r) {
+                $status  = $r->STATUS == '1' ? '<span class="status--process">Ativado</span>' : '<span class="status--denied">Desativado</span>';
+                $data_r = array();
+
+                $data_r[] = $r->ID;
+                $data_r[] = $r->NOME;
+                $data_r[] = $r->MATRICULA;
+                $data_r[] = $status;
+                $data_r[] = '<div class="table-data-feature">
+                                    <button class="item iconEdit" value="'. $r->ID .'" data-toggle="tooltip" data-placement="top" title="Editar">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </button>
+	                            <div class="table-data-feature">
+									<button class="item iconDelete" value="'. $r->ID .'" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+									    <i class="zmdi zmdi-delete"></i>
+									</button>
+	                            </div>
+                            </div>' ;
+                $data[] = $data_r;
+          }
+
+            $total_usuarios = $this->m_user->get_total_membros($start, $length);
+            $output = array(
+               "draw" 				=> $draw,
+                 "recordsTotal" 	=> $total_usuarios,
+                 "recordsFiltered" 	=> $total_usuarios,
+                 "data" 			=> $data
+            );
+          echo json_encode($output);
+          exit();
 	}
 
 	public function addUser(){
@@ -79,6 +80,8 @@ class Usuario extends CI_Controller {
 	}
 
 	public function deleteUser(){
+		$data=$this->m_user->delete_user();
+		echo json_encode($data);
 		
 	}
 

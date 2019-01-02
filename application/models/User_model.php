@@ -3,62 +3,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User_model extends CI_Model{
 
-    // public function get_users()
-    // {
 
-    // 	$query = $this->db->query
-    // 		("SELECT * FROM ss_usuarios");
-	   //  	if ($query->num_rows()) { return $query->result(); } else { return false; }
-    // }
+    var $table          = "ss_usuarios"; 
+    var $select_column  = "ID";  
+    var $order_column   = "DESC";  
 
-    var $table          = "ss_usuarios";  
-    var $select_column  = array("ID", "NOME", "MATRICULA", "SENHA", "CREATED", "STATUS", "USER_CREATED");  
-    var $order_column   = array(null, "ID", "NOME", "STATUS", null, null, null);  
     public function get_users()  
-      {  
-           $this->db->select($this->select_column);  
-           $this->db->from($this->table);  
-           if(isset($_POST["search"]["value"]))  
-           {  
-                $this->db->like("NOME", $_POST["search"]["value"]);  
-                $this->db->or_like("MATRICULA", $_POST["search"]["value"]);  
-           }  
-           if(isset($_POST["order"]))  
-           {  
-                $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
-           }  
-           else  
-           {  
-                $this->db->order_by('ID', 'DESC');  
-           }  
+      {
+
+        $query = $this->db->get($this->table); 
+        return $query->result();
+
       }
 
 
-    public function get_user__start_length(){  
-           $this->get_users();  
-           if(isset($_POST["length"]) != -1)  
-           {  
-                $this->db->limit(isset($_POST['length']), isset($_POST['start']));  
-           }  
-           $query = $this->db->get();  
-           return $query->result();  
-      } 
+    public function get_user_start()
+    {  
+            return $this->db
+                ->limit($length, $start)
+                ->get($this->table);
+    } 
 
-
-    public function get_users_filter()
-    {
-          $this->get_users();  
-           $query = $this->db->get();  
-           return $query->num_rows();
-    }
  
-    public function get_users_total()
+    public function get_total_membros()
     {
-           $this->db->select("*");  
-           $this->db->from($this->table);  
-           return $this->db->count_all_results(); 
+        $query = $this->db->select("COUNT(*) as num")->get($this->table);
+        $result = $query->row();
+        if(isset($result)) return $result->num;
+        return 0;
     }
-
 
 
     public function user_add (){
@@ -72,9 +45,19 @@ class User_model extends CI_Model{
             'USER_CREATED'  => $this->session->userdata('nome')
         );
         #echo json_encode($data);
-        $insert = $this->db->insert('ss_usuarios', $data);
+        $insert = $this->db->insert($this->table, $data);
         return $insert;        
         
+    }
+
+    public function delete_user()
+    {
+        $codUser    =   $this->input->post('user_cod');
+
+        $this->db->where('ID', $codUser);
+        $query = $this->db->delete($this->table);
+        return $query;
+
     }
 
 

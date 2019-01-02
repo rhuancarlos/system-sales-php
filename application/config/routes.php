@@ -17,4 +17,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['Login/Autentica'] 	= 	'Login/verificalogin';
 $route['Home'] 				= 	'Home';
 
-$route['Usuarios'] 			= 	'Usuario/getUsers';
+
+$route['Usuarios'] 			= 	'Usuario/viewlistUser';

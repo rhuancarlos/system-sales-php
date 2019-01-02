@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <strong>Novo Usário</strong>
+        <strong>Cadastro de Usário</strong>
     </div>
     <div class="card-body card-block">
         <form>

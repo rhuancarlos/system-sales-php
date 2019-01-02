@@ -28,66 +28,96 @@
     <script src="<?PHP echo base_url('assets/js/main.js')?>"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-        $('#tablelistusers').DataTable({ 
+    //Call ListUser
+    listarUser();
 
-                  "processing":true,  
-                   "serverSide":true,  
-                   "order":[],  
-                   "ajax":{  
-                        url:"<?php echo base_url() . 'usuario/getUsers'; ?>",  
-                        type:"POST"  
-                   },  
-                   "columnDefs":[  
-                        {  
-                             "targets": [0, 3, 4],  
-                             "orderable":false,  
-                        },  
-                   ]
+    //List User
+    function listarUser(){ 
+        $('#tablelistusers').DataTable({
+            "language":{ //Altera o idioma do DataTable para o português do Brasil
+                "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+            },
+            "bProcessing": true,
+            "ajax": {
+                url: ".usuario/getUsers",
+                type: "POST"
+        }
+
         });
-        
-        //Save Users
-        $('#submit').on('click', function(){
-            var user_nome       =   $('#user_nome').val();
-            var user_matricula  =   $('#user_matricula').val();
-            var user_senha      =   $('#user_senha').val();
+   }
+    
+    //Refresh On DataTable    
+    $("atualizar").click(function(){
+
+        tablelistusers.ajax.reaload();
+
+    });
+
+    //Save Users
+    $('#submit').on('click', function(){
+        var user_nome       =   $('#user_nome').val();
+        var user_matricula  =   $('#user_matricula').val();
+        var user_senha      =   $('#user_senha').val();
+        $.ajax({
+            type : "POST",
+            url  : "<?PHP echo site_url('usuario/addUser')?>",
+            dataType : "JSON",
+            data : { 
+                user_nome:user_nome, 
+                user_matricula:user_matricula, 
+                user_senha:user_senha 
+            },
+            success: function(data)
+            {
+                $('[name="nome"]').val("");
+                $('[name="matricula"]').val("");
+                $('[name="senha"]').val("");
+                $('#modal_addUser').modal('hide');
+                alert('Usuário cadastrado com succeso!');
+                $('#tablelistusers').DataTable().ajax.reload();
+            }
+        });
+        return false;
+    });
+
+        //Delete User
+        $('#tablelistusers').on('click', '.iconDelete', function(){
+            var codUser = $(this).val();
+            $('#modalExcluir').modal('show');
+            $('[name="user_id"]').val(codUser);
+            $("#coddisplay").html(codUser);
+        });
+
+
+        //Action Delete On DataBase
+        $("#confirmDeleteItem").on('click', function(){
+            var codUser = $("#user_id").val();
+
             $.ajax({
                 type : "POST",
-                url  : "<?PHP echo site_url('usuario/addUser')?>",
-                dataType : "JSON",
-                data : { 
-                    user_nome:user_nome, 
-                    user_matricula:user_matricula, 
-                    user_senha:user_senha 
+                url  : "<?PHP echo site_url('usuario/deleteUser')?>",
+                data : {
+                    user_cod:codUser
                 },
-                success: function(data)
-                {
-                    $('[name="user_nome"]').val("");
-                    $('[name="user_matricula"]').val("");
-                    $('[name="user_senha"]').val("");
-                    $('#modal_addUser').modal('hide');
+                success: function(data){
+                    $('[name="user_id"').val("");
+                    $('#modalExcluir').modal('hide');
+                    alert('Usuário Excluido com Sucesso!');
+                    listarUser();
                 }
             });
             return false;
         });
 
-        
+        $('#tablelistusers').on('click', '.iconEdit', function(){
+            var usernome     =   $(this).val();
 
-        //Delete User
-        $('#itemDelet').click(function(){
-                 
-                //var user_cod    =  $('#data-users #codigo').text(); //$('#codigo').val();
-                var user_cod = $(this).val();
-                // console.log(user_cod);
-                // $('#modalExcluir').modal('show');
-                // $('[name="user_id"]').val(user_cod);
-                alert(user_cod);
+            $("#modalEdit").modal('show');
+            $('[name="edituser_nome"]').val(usernome);
+            console.log(usernome);
+
+
         });
-
-        // $('#btnDelet').on('click', function(){
-        //     var user_cod    = $('#usuario_cod').val();
-
-        // });
-
 
     });
     </script>
