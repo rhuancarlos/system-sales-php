@@ -47,7 +47,7 @@
                                     '</div>';
                             } ?>
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="<?PHP echo base_url(); ?>">
                                 <!-- <img src="<?PHP //echo base_url('assets/images/icon/logo.png')?>" alt="CoolAdmin"> -->
                                 <p>System Sales</p>
                             </a>
@@ -65,7 +65,8 @@
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Entrar</button>
                             </form>
                         </div>
-                    </div><small>v 1.0.0</small>
+                    </div><small>v 1.5.0 | <? echo $by;?> <br></small>
+                    <small>Acesso: 1234 | 1234</small>
                 </div>
             </div>
         </div>

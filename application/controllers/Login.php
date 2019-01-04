@@ -26,6 +26,7 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('senha', 'Senha', 'trim|required|max_length[10]');
 
 		$data['metatitle'] 	= 'System Sales';
+		$data['by'] 	= 'Rhuan Carlos';
 		$this->load->view('page-login', $data);
 
 
@@ -54,12 +55,10 @@ class Login extends CI_Controller {
 						redirect('Home');
 					endif;
 				else:
-					var_dump(password_verify($senha, $this->m_login->get_usuario_login($login->SENHA)));
-					echo "Senha Inválida";
+					echo "<script>alert('Senha Inválida');</script>";
 				endif;
 			else:
-				echo "Matricula Inválida";
-				$this->load->view('page-login', $data);
+				echo "<script>alert('Matricula Inválida');</script>";
 			endif;
 
 		endif;
