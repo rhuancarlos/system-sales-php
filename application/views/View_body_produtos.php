@@ -30,7 +30,7 @@
                         <?PHP
                             #switch ($getmethod){
                             #    case 'getUsers':
-                                    $this->load->view('View_usuarios_list');
+                                    $this->load->view('View_produtos_list');
                             #    break;
 
                             #default:
@@ -41,9 +41,9 @@
                     </div>
                 </div>
             </div>
-        <?PHP $this->load->view('_modal_novousuario');  ?>
-        <?PHP $this->load->view('_modal_excluir');      ?>
-        <?PHP $this->load->view('_modal_editar');   ?>   
+        <?PHP $this->load->view('_modal_novoproduto');  ?>
+        <?PHP #$this->load->view('_modal_excluirproduto');      ?>
+        <?PHP $this->load->view('_modal_editarproduto');   ?>   
         </div>
         <!-- END PAGE CONTAINER-->
     </div>

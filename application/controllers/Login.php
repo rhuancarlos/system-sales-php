@@ -43,6 +43,7 @@ class Login extends CI_Controller {
 
 					if($login->STATUS == 1):
 						$this->session->set_userdata('status_session', TRUE);
+						$this->session->set_userdata('codigo', $login->ID);
 						$this->session->set_userdata('nome', $login->NOME);
 						$this->session->set_userdata('usuario', $login->USUARIO);
 						$this->session->set_userdata('matricula', $login->MATRICULA);

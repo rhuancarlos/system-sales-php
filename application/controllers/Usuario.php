@@ -55,7 +55,7 @@ class Usuario extends CI_Controller {
 									    <i class="zmdi zmdi-delete"></i>
 									</button>
 	                            </div>
-                            </div>' ;
+                            </div>';
                 $data[] = $data_r;
           }
 

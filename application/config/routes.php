@@ -19,3 +19,5 @@ $route['Home'] 				= 	'Home';
 
 
 $route['Usuarios'] 			= 	'Usuario/viewlistUser';
+$route['Clientes'] 			= 	'Cliente/viewlistClient';
+$route['Produtos'] 			= 	'Produto/viewlistProdut';

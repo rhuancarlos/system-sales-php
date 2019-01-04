@@ -16,7 +16,7 @@
         </form>
     </div>
     <div class="card-footer">
-        <button type="submit" id="submit" class="btn btn-primary btn-sm">
+        <button type="submit" id="submit_user" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Enviar
         </button>
         <button type="reset" class="btn btn-danger btn-sm">

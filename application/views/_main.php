@@ -27,7 +27,7 @@
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="#">
-                                        <i class="fas fa-angle-right"></i>Vendas</a>
+                                        <i class="fas fa-angle-right"></i>Vender</a>
                                 </li>
                                 <li>
                                     <a href="#">
@@ -48,13 +48,13 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="#">
+                                    <a href="<?PHP echo base_url('Clientes');?>">
                                         <i class="fas fa-angle-right"></i>Novos</a>
                                 </li>
-                                <li>
+<!--                                 <li>
                                     <a href="#">
                                         <i class="fas fa-angle-right"></i>Ver Todos</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="has-sub">
@@ -66,7 +66,7 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="#">
+                                    <a href="<?PHP echo base_url('Produtos');?>">
                                         <i class="fas fa-angle-right"></i>Novos</a>
                                 </li>
                                 <li>
