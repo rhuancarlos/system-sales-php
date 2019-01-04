@@ -1,5 +1,5 @@
 
-### Built With
+### Built With Technologies
 
 - [Accordion.JS](https://github.com/awps/Accordion.JS)
 - [animsition](http://blivesta.github.io/animsition)
@@ -20,9 +20,10 @@
 - [Slick](http://kenwheeler.github.io/slick/)
 - [Sweetalwer](https://github.com/sweetalert2/sweetalert2)
 - [The Final Countdown for jQuery](http://hilios.github.io/jQuery.countdown/)
-- [WOW](https://github.com/matthieua/WOW)
+- [Php v.7.2] (http://php.net)
+- [Mysql v.5] (https://www.mysql.com)
 
-### Authors Theme Template
+### Authors Theme Admin
 [Colorlib](https://colorlib.com)
 
 ### License
